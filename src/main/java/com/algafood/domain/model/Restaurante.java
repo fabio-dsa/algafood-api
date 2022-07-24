@@ -30,6 +30,9 @@ public class Restaurante {
     @JoinColumn(name = "cozinha_id")
     private Cozinha cozinha;
 
+    @Embedded
+    private Endereco endereco;
+
     @ManyToMany
     @JoinTable(name = "restaurante_forma_pagamento",
             joinColumns = @JoinColumn(name = "restaurante_id"),
