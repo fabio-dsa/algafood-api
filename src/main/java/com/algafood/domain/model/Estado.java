@@ -18,7 +18,4 @@ public class Estado {
 
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "estado_id")
-    private Estado estado;
 }
