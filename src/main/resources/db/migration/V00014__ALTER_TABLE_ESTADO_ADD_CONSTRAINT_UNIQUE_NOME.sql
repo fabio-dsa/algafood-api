@@ -1,0 +1,1 @@
+ALTER TABLE estado ADD CONSTRAINT uk_nome UNIQUE(nome);
