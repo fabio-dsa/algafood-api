@@ -5,7 +5,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
+
+import java.util.Locale;
 
 @Component
 public class MessageHelper {
@@ -18,6 +21,11 @@ public class MessageHelper {
 
     public String getMessage(String chave) {
         return messageSource.getMessage(chave, null, LocaleContextHolder.getLocale());
+    }
+
+    @Nullable
+    public String getMessage(String code, String ...args) {
+        return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
     }
 
     public String getMessage(MessageSourceResolvable resolvable) throws NoSuchMessageException {
