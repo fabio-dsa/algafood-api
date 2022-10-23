@@ -3,6 +3,7 @@ package com.algafood.api.controller;
 import com.algafood.api.dto.EstadoDTO;
 import com.algafood.api.dto.assembler.EstadoAssembler;
 import com.algafood.api.dto.disassembler.EstadoDisassembler;
+import com.algafood.core.util.ResourceCreated;
 import com.algafood.domain.model.Estado;
 import com.algafood.domain.service.EstadoService;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +37,9 @@ public class EstadoController {
     }
 
     @PostMapping
-    public ResponseEntity<EstadoDTO> save(@Valid @RequestBody EstadoDTO estadoDTO) {
+    public ResponseEntity<Void> save(@Valid @RequestBody EstadoDTO estadoDTO) {
         Estado estado = this.estadoService.save(this.estadoDisassembler.toEntity(estadoDTO));
-        return ResponseEntity.ok(this.estadoAssembler.toDTO(estado));
+        return ResponseEntity.created(ResourceCreated.location(estado.getId())).build();
     }
 
     @PutMapping("/{id}")

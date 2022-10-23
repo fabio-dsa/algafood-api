@@ -45,7 +45,12 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleDefaultException(Exception ex, WebRequest request) {
-        return handleError(ex, ErrorType.ERRO_INTERNO, request);
+        Error error = new Error.Builder()
+                .errorType(ErrorType.ERRO_INTERNO)
+                .detail(messageHelper.getMessage("app.internal-server-error"))
+                .build();
+        ex.printStackTrace();
+        return super.handleExceptionInternal(ex, error, new HttpHeaders(), HttpStatus.valueOf(error.getStatus()), request);
     }
 
     private ResponseEntity<Object> handleError(Exception ex, ErrorType errorType, WebRequest request) {
